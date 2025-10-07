@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Book Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <header class="navbar">
+        <div class="logo">📚 My Book Tracker</div>
+        <nav class="nav-links">
+            <a href="/about" class="nav-item">About</a>
+
+            {% if session.get('user_name') %}
+                <a href="{{url_for('bookshelf')}}" class="nav-item">Bookshelf</a>
+                
+                <div class="profile-wrapper">
+                    <div class="profile-circle">
+                        {{ session['user_name'][0]|upper }}
+                    </div>
+                    <div class="profile-dropdown">
+                        <p class="dropdown-name">{{ session['user_name'] }}</p>
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="/signup" class="nav-item">Sign Up</a>
+                <a href="/login" class="nav-item">Login</a>
+            {% endif %}
+        </nav>
+        <div class="hamburger">☰</div>
+    </header>
+
+    <main class="split-layout">
+    <div class="left-half"></div>
+    <div class="right-half">
+        <div class="quote-box">
+            <p><em>“A reader lives a thousand lives before he dies.”</em></p>
+            <p><strong>— George R.R. Martin</strong></p>
+
+            <form action="/search/results" method="GET" class="search-bar">
+                <input type="text" name="query" placeholder="Search a book..." required>
+                <button type="submit">🔍 Search</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const profileCircle = document.querySelector('.profile-circle');
+            const dropdown = document.querySelector('.profile-dropdown');
+
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('show');
+                });
+            }
+
+            if (profileCircle && dropdown) {
+                profileCircle.addEventListener('click', () => {
+                    dropdown.classList.toggle('show');
+                });
+
+                // Hide dropdown when clicked outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.profile-wrapper')) {
+                        dropdown.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

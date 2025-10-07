@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up | My Book Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="signup-body">
+    <div class="overlay">
+        <div class="signup-container">
+            <h2>📝 Create Your Account</h2>
+            {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+            <form action="/signup" method="POST" class="signup-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="password" name="password" placeholder="Create Password" required>
+
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+
+            <p class="login-redirect">Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+ <body class="edit-page-body">
+  <div class="edit-container">
+    <h2>✏️ Edit Book Details</h2>
+    <form action="{{ url_for('update_book', book_id=book['id']) }}" method="POST" class="edit-form">
+        <label>Title:
+            <input type="text" name="title" value="{{ book['title'] }}" required>
+        </label>
+        <label>Author(s):
+            <input type="text" name="authors" value="{{ book['authors'] }}" required>
+        </label>
+        <label>Description:
+            <textarea name="description" rows="4">{{ book['description'] }}</textarea>
+        </label>
+        <label>Genre:
+            <input type="text" name="genre" value="{{ book['genre'] }}">
+        </label>
+        <label for="notes">📝 Notes / Quotes:</label>
+        <textarea name="notes" id="notes" rows="4">{{ book['notes'] or '' }}</textarea>
+
+
+        <div class="edit-actions">
+            <button type="submit" class="save-btn">📚 Save Changes</button>
+            <a href="{{ url_for('bookshelf') }}" class="cancel-btn">❌ Cancel</a>
+        </div>
+    </form>
+  </div>
+</body>
+
+</html>

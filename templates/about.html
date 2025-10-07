@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - My Book Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body class="about-body">
+    <header class="navbar">
+        <div class="logo">📚 My Book Tracker</div>
+        <nav class="nav-links">
+            <a href="/" class="nav-item">Home</a>
+            <a href="/about" class="nav-item">About</a>
+            <a href="/bookshelf" class="nav-item">Bookshelf</a>
+        </nav>
+    </header>
+
+    <main class="about-container">
+        <div class="about-card">
+            <h2>📘 About My Book Tracker</h2>
+            <p>
+                <strong>My Book Tracker</strong> is a cozy web app for readers to search, save, and organize books they love. Whether you're a casual reader or a full-on bookworm, this platform helps you build your own personal bookshelf.
+            </p>
+            <p>
+                Hi, I’m <strong>Yashwasi</strong> — a third-year Computer Science student who built this project to learn full stack development. I wanted it to be functional, pretty, and fun to use!
+            </p>
+            <h3>✨ Features:</h3>
+            <ul>
+                <li>📚 Add books to your shelf</li>
+                <li>🔍 Search books using the Google Books API</li>
+                <li>🧾 View authors, genres, and summaries</li>
+            </ul>
+
+            <h3>🛠️ Built With:</h3>
+            <ul>
+                <li>🐍 Flask (Python)</li>
+                <li>🗃️ SQLite</li>
+                <li>🎨 HTML & CSS</li>
+                <li>🌐 Google Books API</li>
+            </ul>
+
+            <p>
+                This is just the beginning! I plan to keep improving the app — adding book ratings, categories, and even public reading lists.
+            </p>
+
+            <p class="thank-you">Thanks for visiting! 📖</p>
+        </div>
+    </main>
+</body>
+</html>

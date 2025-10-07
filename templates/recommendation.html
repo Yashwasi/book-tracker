@@ -1,0 +1,38 @@
+<!-- templates/recommendations.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="recommend-body">
+    <div class="background-wrapper">
+        <header class="navbar">
+            <div class="logo">📚 My Book Tracker</div>
+            <nav class="nav-links">
+                <a href="/" class="nav-item">Home</a>
+                <a href="/bookshelf" class="nav-item">My Bookshelf</a>
+                <a href="/recommendation" class="nav-item active">✨ AI Recommendation</a>
+                <div class="profile-wrapper">
+                    <div class="profile-circle">{{ session['user_name'][0]|upper }}</div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="book-list-page">
+            <h2 class="booklist-heading">✨ Recommended Just for You</h2>
+            <div class="book-grid">
+                {% for book in books %}
+                <div class="book-card">
+                    <img src="{{ book.thumbnail }}" alt="Cover">
+                    <h3>{{ book.title }}</h3>
+                    <p><strong>Author:</strong> {{ book.author }}</p>
+                    <p>{{ book.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

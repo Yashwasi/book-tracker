@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="detail-body">
+    <div class="background-wrapper">
+        <header class="navbar">
+            <div class="logo">📖 Book Description</div>
+            <nav class="nav-links">
+                <a href="/bookshelf" class="nav-item">← Back</a>
+            </nav>
+        </header>
+
+       <main class="book-detail-page">
+    <div class="book-detail-card">
+        <img src="{{ book.thumbnail }}" alt="Cover" class="book-cover">
+        <div class="book-text">
+            <h1>{{ book.title }}</h1>
+            <p><strong>Authors:</strong> {{ book.authors }}</p>
+            <p><strong>Genre:</strong> {{ book.genre }}</p>
+            <p class="full-description">{{ book.description }}</p>
+        </div>
+    </div>
+</main>
+
+    </div>
+</body>
+</html>

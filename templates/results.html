@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="results-body">
+    <header class="navbar">
+        <div class="logo">📚 My Book Tracker</div>
+        <a href="{{ url_for('bookshelf') }}" class="nav-item">📚 Bookshelf</a>
+    </header>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-msg">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+
+    <main class="content">
+        <div class="search-bar-wrapper">
+            <form action="/search/results" method="GET" class="search-form">
+                <input type="text" name="query" placeholder="Search by book or author..." required>
+                <button type="submit" class="black-transparent-btn">🔍 Search</button>
+            </form>
+        </div>
+
+        {% if books %}
+            <h2 class="search-heading">Your search results for: <em>{{ query }}</em></h2>
+            <div class="results-section">
+                <div class="book-grid">
+                    {% for book in books %}
+                        <div class="book-card">
+                            {% if book.thumbnail %}
+                                <img src="{{ book.thumbnail }}" alt="Cover">
+                            {% endif %}
+                            <h3>{{ book.title }}</h3>
+                            <p><strong>Author(s):</strong> {{ book.authors }}</p>
+                            <p>{{ book.description }}</p>
+
+                            <!-- Add to Bookshelf Button -->
+                            <form method="POST" action="/add">
+                                <input type="hidden" name="title" value="{{ book.title }}">
+                                <input type="hidden" name="authors" value="{{ book.authors }}">
+                                <input type="hidden" name="description" value="{{ book.description }}">
+                                <input type="hidden" name="thumbnail" value="{{ book.thumbnail }}">
+                                <button type="submit" class="add-btn">➕ Add to Bookshelf</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% elif query %}
+            <p class="empty-msg">No results found. Try something else!</p>
+        {% endif %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!-- search.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <body class="search-body">
+    <header class="navbar">
+        <div class="logo">📚 My Book Tracker</div>
+    </header>
+
+    <main class="content">
+    <!-- Search bar goes at the top, centered -->
+    <div class="search-bar-wrapper">
+        <form action="/search/results" method="GET" class="search-form">
+            <input type="text" name="query" placeholder="Search by book or author..." required>
+            <button type="submit" class="black-transparent-btn">🔍 Search</button>
+        </form>
+    </div>
+
+    {% if books %}
+    <h2 class="search-heading">Your search results for: <em>{{ query }}</em></h2>
+
+    <!-- Centered results -->
+    <div class="results-section">
+        <div class="book-grid">
+            {% for book in books %}
+            <div class="book-card">
+                {% if book.thumbnail %}
+                    <img src="{{ book.thumbnail }}" alt="Cover">
+                {% endif %}
+                <h3>{{ book.title }}</h3>
+                <p><strong>Author(s):</strong> {{ book.authors }}</p>
+                <p>{{ book.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% elif query %}
+    <p class="empty-msg">No results found. Try something else!</p>
+{% endif %}
+
+        
+</main>
+
+
+</body>
+</html>
