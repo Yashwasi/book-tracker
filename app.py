@@ -213,6 +213,10 @@ def search_results():
         response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": query})
         if response.status_code == 200:
             data = response.json()
+
+            print("STATUS:", response.status_code)
+            print("ITEMS FOUND:", len(data.get('items', [])))
+
             for item in data.get('items', []):
                 volume_info = item['volumeInfo']
                 results.append({
@@ -368,9 +372,11 @@ def logout():
     return redirect("/")
 
 
+import os
 
-
-# 🔁 Initialize DB and run
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)  
+    app.run(
+        host='0.0.0.0',
+        port=int(os.environ.get('PORT', 5000))
+    ) 
